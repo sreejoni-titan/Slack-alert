@@ -15,5 +15,5 @@ jobs:
           if [ "$DAY_AFTER_TOMORROW" = "01" ]; then
             curl -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
             -H "Content-Type: application/json" \
-            -d '{"text": "⏳ PENULTIMATE ALERT: Tomorrow is the last day of the month!"}'
+            -d '{"text": "Alert!"}'
           fi
