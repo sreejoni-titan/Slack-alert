@@ -2,27 +2,18 @@ name: Slack Penultimate Day Alert
 
 on:
   schedule:
-    - cron: '10 13 27-31 * *'
+    - cron: '0 14 27-30 * *'
   workflow_dispatch:
 
 jobs:
-  check_and_trigger:
+  alert:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if today is the day before the last day
-        id: date_check
+      - name: Check if Day After Tomorrow is 1st
         run: |
-          # If the day after tomorrow is "01", today is the day before the last day
           DAY_AFTER_TOMORROW=$(date -d "+2 days" +%d)
           if [ "$DAY_AFTER_TOMORROW" = "01" ]; then
-            echo "is_penultimate_day=true" >> $GITHUB_OUTPUT
-          else
-            echo "is_penultimate_day=false" >> $GITHUB_OUTPUT
+            curl -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{"text": "⏳ PENULTIMATE ALERT: Tomorrow is the last day of the month!"}'
           fi
-
-      - name: Send Slack Alert
-        if: steps.date_check.outputs.is_penultimate_day == 'true'
-        run: |
-          curl -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
-          -H "Content-Type: application/json" \
-          -d '{"text": "Alert test"}'
