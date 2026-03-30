@@ -2,7 +2,7 @@ name: Slack Penultimate Day Alert
 
 on:
   schedule:
-    - cron: '0 9 27-30 * *'
+    - cron: '30 11 27-30 * *'
   workflow_dispatch:
 
 jobs:
