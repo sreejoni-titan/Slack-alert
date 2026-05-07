@@ -26,6 +26,6 @@ jobs:
           curl -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "User": "<@sreejoni>",
+            "User": "Sreejoni <@U123456789>",
             "Task": "Renew the names!"
           }'
