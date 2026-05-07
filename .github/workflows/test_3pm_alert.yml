@@ -3,7 +3,8 @@ name: 3PM Slack Connection Test
 on:
   schedule:
     - cron: '0 14 * * *'
-  workflow_dispatch: 
+  workflow_dispatch:
+
 jobs:
   test_slack:
     runs-on: ubuntu-latest
@@ -13,6 +14,6 @@ jobs:
           curl -X POST "${{ secrets.SLACK_WEBHOOK_URL }}" \
           -H "Content-Type: application/json" \
           -d '{
-            "User": "<@sreejoni>",
-            "Task": "The 3PM Test was Successful!"
+            "User": "Sreejoni <@U123456789>",
+            "Task": "The 3PM alert test was successful!"
           }'
